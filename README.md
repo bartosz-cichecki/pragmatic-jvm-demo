@@ -59,13 +59,13 @@ Application implementation has not started. There are currently no application e
 
 The first iterations will establish repository rules, architecture documentation, and a Spring Boot skeleton.
 
-## Initial roadmap
+## Initial backlog
 
 1. Repository documentation and architecture rules
-2. Kotlin and Spring Boot skeleton
-3. Client as a tenant
+2. Kotlin and Spring Boot skeleton with the Gradle Wrapper
+3. Client as a tenant, including the first aggregate, a transaction-aware command dispatcher, a JPA repository, an initial Flyway migration, and an ADR selecting the Kotlin/JPA domain-mapping strategy
 4. User and OTP authentication
 5. ClientMember and tenant authorization
-6. CQRS-lite read models
-7. Domain events and a transactional outbox
-8. Final quality gates and documentation
+6. CQRS-lite read models implemented with Spring `JdbcClient`
+7. Domain events and a transactional outbox, including the event log, synchronous dispatch, transaction/flush/rollback integration tests, the PostgreSQL worker and consumption idempotency, plus an ADR defining the durable integration-event name and JSON serialisation contract
+8. Final quality gates and documentation, including detekt, ArchUnit, JUnit 5, Testcontainers, and behaviour-test execution
