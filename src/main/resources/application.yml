@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: ${SPRING_APPLICATION_NAME:pragmatic-jvm-demo}
+
+server:
+  port: ${SERVER_PORT:8081}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+      group:
+        readiness:
+          include: readinessState

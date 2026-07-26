@@ -1,3 +1,8 @@
 # IntelliJ IDEA
 .idea/
 *.iml
+
+# Gradle
+.gradle/
+.kotlin/
+build/

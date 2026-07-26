@@ -20,9 +20,9 @@ The planned work will demonstrate:
 - small iterations that are easy to understand and review;
 - AI-assisted development governed by explicit repository rules and human review.
 
-## Planned technology stack
+## Technology stack
 
-The following stack is planned; none of it has been introduced in the repository yet:
+The Kotlin/Spring Boot development baseline is implemented. Database, persistence, integration-testing, and architecture-testing technologies remain planned for later iterations:
 
 - Kotlin targeting Java 21;
 - Spring Boot;
@@ -30,7 +30,7 @@ The following stack is planned; none of it has been introduced in the repository
 - PostgreSQL with Flyway migrations;
 - JPA/Hibernate for writes;
 - Spring `JdbcClient` for reads;
-- JUnit 5 and Testcontainers for automated testing;
+- JUnit 6 for the application-context test, with Testcontainers planned for later integration tests;
 - ArchUnit for automated architecture checks.
 
 Technology choices will be added only when they support a concrete business or engineering need.
@@ -55,11 +55,19 @@ Later iterations are intended to introduce passwordless sign-in using one-time p
 
 ## Project status
 
-**Status: foundation / work in progress**
+**Status: Spring Boot development baseline / work in progress**
 
-Application implementation has not started. There are currently no application endpoints, domain aggregates, automated tests, quality gates, database integration, event flows, or infrastructure in this repository.
+The repository contains a minimal Kotlin/Spring Boot application, Gradle Wrapper build, application-context test, and Actuator readiness endpoint. There are currently no business endpoints, domain aggregates, database integration, event flows, or business infrastructure.
 
-The documentation foundation is complete. The next implementation iteration will establish the Spring Boot development baseline.
+The documentation foundation and Spring Boot development baseline are complete. The next implementation iteration will establish the production-like runtime image baseline.
+
+## Local development port
+
+The application listens on port `8081` by default. Override it for a single run through the environment when that port is already in use:
+
+```text
+SERVER_PORT=9090 make dev
+```
 
 ## Implementation backlog
 

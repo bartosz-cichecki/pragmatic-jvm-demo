@@ -331,9 +331,9 @@ A rule may tolerate an absent package in an empty module, but it must automatica
 
 ## 13. Test strategy
 
-- **Domain unit tests:** JUnit 5 verifies aggregate, value-object, factory, and policy behaviour, including invariants, material failure paths, and recorded events. Tests use fake Outside implementations and deterministic `Instant` values.
+- **Domain unit tests:** JUnit 6 verifies aggregate, value-object, factory, and policy behaviour, including invariants, material failure paths, and recorded events. Tests use fake Outside implementations and deterministic `Instant` values.
 - **Integration tests:** Spring Boot Test and Testcontainers with PostgreSQL verify repository adapters, JPA mapping, `JdbcClient` queries, migrations, the event log, transaction boundaries, and outbox behaviour when a change affects those mechanisms.
-- **Behaviour tests:** JUnit 5 and Spring Boot Test cover at least the happy path of a complete business flow through UI, Application, Domain, and Infrastructure, as well as material failure behaviour required by the use case's rules.
+- **Behaviour tests:** JUnit 6 and Spring Boot Test cover at least the happy path of a complete business flow through UI, Application, Domain, and Infrastructure, as well as material failure behaviour required by the use case's rules.
 - **Architecture tests:** ArchUnit verifies static layer and context boundaries, while focused Spring context tests verify conventions visible only at runtime.
 
 A separate mapping test is not required for every aggregate if a meaningful integration or behaviour test exercises persistence, `flush`, reload, and behaviour. A dedicated test is required when mapping lacks such coverage or is non-trivial.
