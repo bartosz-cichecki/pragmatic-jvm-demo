@@ -331,9 +331,9 @@ Reguła może tolerować brak pakietu w pustym module, ale musi automatycznie ob
 
 ## 13. Strategia testów
 
-- **Testy jednostkowe Domain:** JUnit 5 sprawdza zachowanie agregatów, value objects, fabryk i polityk, w tym niezmienniki, istotne ścieżki błędów i rejestrowane zdarzenia. Testy używają atrap Outside i deterministycznego `Instant`.
+- **Testy jednostkowe Domain:** JUnit 6 sprawdza zachowanie agregatów, value objects, fabryk i polityk, w tym niezmienniki, istotne ścieżki błędów i rejestrowane zdarzenia. Testy używają atrap Outside i deterministycznego `Instant`.
 - **Testy integracyjne:** Spring Boot Test i Testcontainers z PostgreSQL sprawdzają adaptery repozytoriów, mapowanie JPA, zapytania `JdbcClient`, migracje, dziennik zdarzeń, granice transakcji oraz zachowanie outboxa, jeżeli zmiana dotyczy tych mechanizmów.
-- **Testy zachowania:** JUnit 5 i Spring Boot Test obejmują co najmniej pozytywną ścieżkę kompletnego przepływu biznesowego przez UI, Application, Domain i Infrastructure oraz istotne zachowania błędne wynikające z reguł przypadku użycia.
+- **Testy zachowania:** JUnit 6 i Spring Boot Test obejmują co najmniej pozytywną ścieżkę kompletnego przepływu biznesowego przez UI, Application, Domain i Infrastructure oraz istotne zachowania błędne wynikające z reguł przypadku użycia.
 - **Testy architektury:** ArchUnit sprawdza statyczne granice warstw i kontekstów, a ukierunkowane testy kontekstu Springa — konwencje widoczne dopiero w czasie wykonania.
 
 Oddzielny test mapowania nie jest wymagany dla każdego agregatu, jeżeli miarodajny test integracyjny lub zachowania wykonuje utrwalenie, `flush`, ponowne wczytanie i zachowanie. Dedykowany test jest wymagany, gdy mapping nie ma takiego pokrycia albo jest nietrywialny.

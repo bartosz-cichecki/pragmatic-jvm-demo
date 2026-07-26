@@ -19,7 +19,7 @@ Items are ordered by dependency. Implementation items remain `TODO` until their 
 | Order | Iteration | Status |
 | --- | --- | --- |
 | 0 | Repository documentation foundation | `DONE` |
-| 1 | Spring Boot development baseline | `TODO` |
+| 1 | Spring Boot development baseline | `DONE` |
 | 2 | Production-like runtime image baseline | `TODO` |
 | 3 | Unified quality gate and continuous integration | `TODO` |
 | 4 | Client domain model | `TODO` |
@@ -124,7 +124,7 @@ git diff --check
 
 ## 1. Spring Boot development baseline
 
-**Status:** `TODO`
+**Status:** `DONE`
 
 **Goal**
 
@@ -172,7 +172,7 @@ Run the readiness request in another terminal while `bootRun` is active.
 ./gradlew -q javaToolchains
 ./gradlew test
 ./gradlew bootRun
-curl --fail --silent --show-error http://localhost:8080/actuator/health/readiness
+curl --fail --silent --show-error http://localhost:8081/actuator/health/readiness
 make dev
 make test
 ```
@@ -242,7 +242,7 @@ Establish one quality contract used identically by developers and CI.
 
 - Kotlin formatting, for example Spotless with ktlint.
 - detekt static analysis.
-- Kotlin compilation and JUnit 5 tests.
+- Kotlin compilation and JUnit 6 tests.
 - One aggregate Gradle task named `qa` that runs every currently applicable quality gate.
 - `make qa` delegating directly to `./gradlew qa`.
 - A GitHub Actions CI workflow using Temurin 21.
@@ -401,7 +401,7 @@ test    -> Testcontainers
 ./gradlew test
 ./gradlew qa
 ./gradlew bootRun
-curl --fail --silent --show-error http://localhost:8080/actuator/health/readiness
+curl --fail --silent --show-error http://localhost:8081/actuator/health/readiness
 ```
 
 ## 6. Create Client application use case

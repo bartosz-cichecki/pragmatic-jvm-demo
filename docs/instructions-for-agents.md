@@ -18,7 +18,6 @@ Use this hierarchy:
    - Do not interpret planned technology or business scope as already implemented.
 3. Existing code, tests, Gradle configuration, CI configuration, and `Makefile`, when present
    - Establish local conventions, actual module and package structure, available commands, and executable verification.
-   - The repository currently contains no application code, tests, Gradle build, Gradle Wrapper, CI configuration, or `Makefile`; do not invent commands or infer that planned tooling is available.
 4. A backlog or other development plans, when present
    - May describe future work.
    - Cannot override the architecture contract or be treated as a description of the existing system.
@@ -82,7 +81,7 @@ Keep the pre-flight proportional to the task. Do not introduce a large form or c
 
 Before choosing commands, inspect the actual Gradle build, Gradle Wrapper, `Makefile`, and CI configuration. Use only commands that exist in the checked-out repository.
 
-At present, the repository has no Gradle build, Gradle Wrapper, `Makefile`, CI configuration, application code, or automated tests. The only defined gate applicable to documentation-only changes is:
+For documentation-only changes, the minimum gate is:
 
 ```text
 git diff --check
