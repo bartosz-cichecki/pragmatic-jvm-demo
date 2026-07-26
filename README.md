@@ -6,6 +6,8 @@ Pragmatic JVM Engineering Demo is a public engineering portfolio project for bui
 
 The repository is intended to make architectural choices, domain reasoning, testing strategy, and engineering trade-offs visible as the project develops. AI assists the development process, while architectural decisions, verification, and review remain under human control.
 
+The intended execution and delivery boundary is local development and demonstration plus verification in GitHub Actions. No VPS deployment, container registry, or image-promotion pipeline is planned.
+
 ## What this project is intended to demonstrate
 
 The planned work will demonstrate:
@@ -57,15 +59,10 @@ Later iterations are intended to introduce passwordless sign-in using one-time p
 
 Application implementation has not started. There are currently no application endpoints, domain aggregates, automated tests, quality gates, database integration, event flows, or infrastructure in this repository.
 
-The first iterations will establish repository rules, architecture documentation, and a Spring Boot skeleton.
+The documentation foundation is complete. The next implementation iteration will establish the Spring Boot development baseline.
 
-## Initial backlog
+## Implementation backlog
 
-1. Repository documentation and architecture rules
-2. Kotlin and Spring Boot skeleton with the Gradle Wrapper
-3. Client as a tenant, including the first aggregate, a transaction-aware command dispatcher, a JPA repository, an initial Flyway migration, and an ADR selecting the Kotlin/JPA domain-mapping strategy
-4. User and OTP authentication
-5. ClientMember and tenant authorization
-6. CQRS-lite read models implemented with Spring `JdbcClient`
-7. Domain events and a transactional outbox, including the event log, synchronous dispatch, transaction/flush/rollback integration tests, the PostgreSQL worker and consumption idempotency, plus an ADR defining the durable integration-event name and JSON serialisation contract
-8. Final quality gates and documentation, including detekt, ArchUnit, JUnit 5, Testcontainers, and behaviour-test execution
+The current delivery target is the first complete `Client` creation flow. Detailed implementation order, current status, delivery scope, completion criteria, and verification commands are maintained in the [product backlog](docs/product-backlog.md).
+
+The backlog is the source of truth for delivery planning. It does not replace the normative [architecture contract](docs/architecture.en.md).
