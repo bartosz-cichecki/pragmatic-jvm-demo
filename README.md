@@ -22,11 +22,12 @@ The planned work will demonstrate:
 
 ## Technology stack
 
-The Kotlin/Spring Boot development baseline is implemented. Database, persistence, integration-testing, and architecture-testing technologies remain planned for later iterations:
+The Kotlin/Spring Boot development baseline and production-like Docker runtime image are implemented. Database, persistence, integration-testing, and architecture-testing technologies remain planned for later iterations:
 
 - Kotlin targeting Java 21;
 - Spring Boot;
 - Gradle with Kotlin DSL;
+- Docker and Docker Compose for the production-like local runtime image;
 - PostgreSQL with Flyway migrations;
 - JPA/Hibernate for writes;
 - Spring `JdbcClient` for reads;
@@ -55,11 +56,11 @@ Later iterations are intended to introduce passwordless sign-in using one-time p
 
 ## Project status
 
-**Status: Spring Boot development baseline / work in progress**
+**Status: Production-like runtime image baseline complete**
 
-The repository contains a minimal Kotlin/Spring Boot application, Gradle Wrapper build, application-context test, and Actuator readiness endpoint. There are currently no business endpoints, domain aggregates, database integration, event flows, or business infrastructure.
+The repository contains a minimal Kotlin/Spring Boot application, Gradle Wrapper build, application-context test, Actuator readiness endpoint, and a production-like local runtime image. There are currently no business endpoints, domain aggregates, database integration, event flows, or business infrastructure.
 
-The documentation foundation and Spring Boot development baseline are complete. The next implementation iteration will establish the production-like runtime image baseline.
+The documentation foundation, Spring Boot development baseline, and production-like runtime image baseline are complete. The next iteration will establish the unified quality gate and continuous integration.
 
 ## Local development port
 
@@ -68,6 +69,21 @@ The application listens on port `8081` by default. Override it for a single run 
 ```text
 SERVER_PORT=9090 make dev
 ```
+
+## Runtime image
+
+Build the application JAR on the host and package it into the local runtime image, then start and verify that image:
+
+```text
+make image
+make up
+make smoke
+make down
+```
+
+`make up` starts the existing image without rebuilding it. The application always listens on port `8081` inside the runtime container. `APP_PORT` controls only the port published on the host; it does not change the container's `SERVER_PORT`. Set the same `APP_PORT` value for `make up` and `make smoke` to use another host port.
+
+The image uses an exec-form entrypoint. Supply JVM options through Java's standard `JAVA_TOOL_OPTIONS` environment variable when starting the container; no universal heap limit is built into the image.
 
 ## Implementation backlog
 
