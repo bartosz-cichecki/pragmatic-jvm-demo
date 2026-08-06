@@ -20,7 +20,7 @@ Items are ordered by dependency. Implementation items remain `TODO` until their 
 | --- | --- | --- |
 | 0 | Repository documentation foundation | `DONE` |
 | 1 | Spring Boot development baseline | `DONE` |
-| 2 | Production-like runtime image baseline | `TODO` |
+| 2 | Production-like runtime image baseline | `DONE` |
 | 3 | Unified quality gate and continuous integration | `TODO` |
 | 4 | Client domain model | `TODO` |
 | 5 | Client persistence baseline | `TODO` |
@@ -179,7 +179,7 @@ make test
 
 ## 2. Production-like runtime image baseline
 
-**Status:** `TODO`
+**Status:** `DONE`
 
 **Goal**
 

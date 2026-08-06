@@ -1,0 +1,10 @@
+name: pragmatic-jvm-demo-runtime
+
+services:
+  application:
+    image: ${APP_IMAGE:-pragmatic-jvm-demo:local}
+    pull_policy: never
+    environment:
+      SERVER_PORT: "8081"
+    ports:
+      - "${APP_PORT:-8081}:8081"
