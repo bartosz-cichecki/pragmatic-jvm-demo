@@ -6,3 +6,6 @@
 .gradle/
 .kotlin/
 build/
+
+# Local engineering tools
+.engineering-lens/
