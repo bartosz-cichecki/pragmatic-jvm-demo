@@ -16,6 +16,10 @@ permissions:
 jobs:
   quality-and-runtime:
     runs-on: ubuntu-latest
+    env:
+      DATABASE_NAME: pragmatic_jvm_demo
+      DATABASE_USERNAME: pragmatic_jvm_demo
+      DATABASE_PASSWORD: ci-runtime-only
     steps:
       - name: Check out repository
         uses: actions/checkout@v6
@@ -43,7 +47,7 @@ jobs:
 
       - name: Show runtime logs
         if: failure()
-        run: docker compose -f compose.runtime.yaml logs --no-color application
+        run: docker compose -f compose.runtime.yaml logs --no-color
 
       - name: Stop runtime image
         if: always()

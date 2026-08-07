@@ -1,6 +1,16 @@
 spring:
   application:
     name: ${SPRING_APPLICATION_NAME:pragmatic-jvm-demo}
+  flyway:
+    enabled: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
 
 server:
   port: ${SERVER_PORT:8081}
@@ -15,5 +25,7 @@ management:
       probes:
         enabled: true
       group:
+        liveness:
+          include: livenessState
         readiness:
-          include: readinessState
+          include: readinessState,db
