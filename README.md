@@ -22,7 +22,7 @@ The planned work will demonstrate:
 
 ## Technology stack
 
-The Kotlin/Spring Boot development baseline, production-like Docker runtime image, unified quality gate, and GitHub Actions CI are implemented. Database, persistence, integration-testing, and architecture-testing technologies remain planned for later iterations:
+The Kotlin/Spring Boot development baseline, production-like Docker runtime image, unified quality gate, GitHub Actions CI, first Client domain model, and ArchUnit architecture testing are implemented. Database, persistence, and integration-testing technologies remain planned for later iterations:
 
 - Kotlin targeting Java 21;
 - Spring Boot;
@@ -34,7 +34,7 @@ The Kotlin/Spring Boot development baseline, production-like Docker runtime imag
 - PostgreSQL with Flyway migrations;
 - JPA/Hibernate for writes;
 - Spring `JdbcClient` for reads;
-- JUnit 6 for the application-context test, with Testcontainers planned for later integration tests;
+- JUnit 6 for application-context and domain unit tests, with Testcontainers planned for later integration tests;
 - ArchUnit for automated architecture checks.
 
 Technology choices will be added only when they support a concrete business or engineering need.
@@ -59,11 +59,11 @@ Later iterations are intended to introduce passwordless sign-in using one-time p
 
 ## Project status
 
-**Status: Unified quality gate and continuous integration complete**
+**Status: Client domain model complete**
 
-The repository contains a minimal Kotlin/Spring Boot application, Gradle Wrapper build, application-context test, Kotlin formatting with Spotless and ktlint, detekt static analysis, GitHub Actions CI, an Actuator readiness endpoint, and a production-like local runtime image. There are currently no business endpoints, domain aggregates, database integration, event flows, or business infrastructure.
+The repository contains a minimal Kotlin/Spring Boot application, Gradle Wrapper build, application-context and domain unit tests, Kotlin formatting with Spotless and ktlint, detekt static analysis, ArchUnit architecture testing, GitHub Actions CI, an Actuator readiness endpoint, a production-like local runtime image, and the pure-Kotlin `Client` domain model. There are currently no business endpoints, database integration, event flows, or business infrastructure.
 
-The documentation foundation, Spring Boot development baseline, production-like runtime image baseline, and unified quality gate with CI are complete. The next iteration will introduce the `Client` domain model.
+The documentation foundation, Spring Boot development baseline, production-like runtime image baseline, unified quality gate with CI, and Client domain model are complete. The next iteration will introduce Client persistence.
 
 ## Quality checks
 

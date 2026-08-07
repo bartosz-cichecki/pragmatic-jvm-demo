@@ -1,6 +1,6 @@
 # Product backlog
 
-This backlog defines the implementation order and delivery scope from the repository's current documentation-only state to the first complete business flow in the `Client` bounded context.
+This backlog defines the implementation order and delivery scope from the repository's initial documentation-only state to the first complete business flow in the `Client` bounded context.
 
 The repository is a local engineering demo verified by GitHub Actions. It has no VPS or other deployment target, no container registry, and no image-promotion pipeline in the planned scope.
 
@@ -22,12 +22,12 @@ Items are ordered by dependency. Implementation items remain `TODO` until their 
 | 1 | Spring Boot development baseline | `DONE` |
 | 2 | Production-like runtime image baseline | `DONE` |
 | 3 | Unified quality gate and continuous integration | `DONE` |
-| 4 | Client domain model | `TODO` |
+| 4 | Client domain model | `DONE` |
 | 5 | Client persistence baseline | `TODO` |
 | 6 | Create Client application use case | `TODO` |
 | 7 | Create Client HTTP flow and living documentation | `TODO` |
 
-Commands listed under a `TODO` item are the acceptance contract for that iteration. They are not claimed to exist in the current documentation-only repository.
+Commands listed under a `TODO` item are the acceptance contract for that iteration. Their inclusion does not claim that every command or capability required by that iteration is already available.
 
 ## Development and delivery model
 
@@ -285,7 +285,7 @@ make down
 
 ## 4. Client domain model
 
-**Status:** `TODO`
+**Status:** `DONE`
 
 **Goal**
 
