@@ -234,6 +234,8 @@ make down
 
 **Status:** `TODO`
 
+**Verification state:** Local acceptance commands pass; the first GitHub Actions run is pending.
+
 **Goal**
 
 Establish one quality contract used identically by developers and CI.

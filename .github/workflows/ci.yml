@@ -1,0 +1,50 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  quality-and-runtime:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v6
+
+      - name: Run quality gates
+        run: ./gradlew qa
+
+      - name: Build runtime image
+        run: make image
+
+      - name: Start runtime image
+        run: make up
+
+      - name: Smoke-test runtime image
+        run: make smoke
+
+      - name: Show runtime logs
+        if: failure()
+        run: docker compose -f compose.runtime.yaml logs --no-color application
+
+      - name: Stop runtime image
+        if: always()
+        run: make down
