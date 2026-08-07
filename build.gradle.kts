@@ -6,6 +6,8 @@ plugins {
     kotlin("plugin.spring") version "2.3.21"
     id("org.springframework.boot") version "4.1.0"
     id("io.spring.dependency-management") version "1.1.7"
+    id("com.diffplug.spotless") version "8.9.0"
+    id("dev.detekt") version "2.0.0-alpha.3"
 }
 
 repositories {
@@ -34,8 +36,41 @@ dependencies {
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
+spotless {
+    kotlin {
+        target("src/**/*.kt")
+        ktlint("1.8.0")
+    }
+    kotlinGradle {
+        target("*.gradle.kts")
+        ktlint("1.8.0")
+    }
+}
+
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+tasks.named("detekt") {
+    mustRunAfter("spotlessCheck")
+}
+
+tasks.named("compileKotlin") {
+    mustRunAfter("spotlessCheck")
+}
+
+tasks.named("compileTestKotlin") {
+    mustRunAfter("spotlessCheck")
+}
+
+tasks.named<Test>("test") {
+    mustRunAfter("detekt")
+}
+
+tasks.register("qa") {
+    group = "verification"
+    description = "Runs all quality gates applicable to the current project."
+    dependsOn("spotlessCheck", "detekt", "test")
 }
 
 tasks.named<BootJar>("bootJar") {
