@@ -31,6 +31,20 @@ class Client private constructor(
                 deactivatedAt = null,
             )
         }
+
+        internal fun restore(
+            state: PersistenceState,
+            timeProvider: ClientTimeProvider,
+        ): Client =
+            Client(
+                id = state.id,
+                name = state.name,
+                description = state.description,
+                timeProvider = timeProvider,
+                createdAt = state.createdAt,
+                updatedAt = state.updatedAt,
+                deactivatedAt = state.deactivatedAt,
+            )
     }
 
     fun rename(newName: ClientName): Boolean {
@@ -66,7 +80,26 @@ class Client private constructor(
         return true
     }
 
+    internal fun persistenceState(): PersistenceState =
+        PersistenceState(
+            id = id,
+            name = name,
+            description = description,
+            createdAt = createdAt,
+            updatedAt = updatedAt,
+            deactivatedAt = deactivatedAt,
+        )
+
     private fun ensureActive() {
         check(deactivatedAt == null) { "Inactive client cannot be changed" }
     }
+
+    internal data class PersistenceState(
+        val id: ClientId,
+        val name: ClientName,
+        val description: String?,
+        val createdAt: Instant,
+        val updatedAt: Instant,
+        val deactivatedAt: Instant?,
+    )
 }

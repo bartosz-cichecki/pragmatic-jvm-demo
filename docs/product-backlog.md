@@ -23,7 +23,7 @@ Items are ordered by dependency. Implementation items remain `TODO` until their 
 | 2 | Production-like runtime image baseline | `DONE` |
 | 3 | Unified quality gate and continuous integration | `DONE` |
 | 4 | Client domain model | `DONE` |
-| 5 | Client persistence baseline | `TODO` |
+| 5 | Client persistence baseline | `DONE` |
 | 6 | Create Client application use case | `TODO` |
 | 7 | Create Client HTTP flow and living documentation | `TODO` |
 
@@ -338,7 +338,7 @@ The PHP reference is a source of business intent only. The model and tests must 
 
 ## 5. Client persistence baseline
 
-**Status:** `TODO`
+**Status:** `DONE`
 
 **Goal**
 

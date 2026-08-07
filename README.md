@@ -22,7 +22,7 @@ The planned work will demonstrate:
 
 ## Technology stack
 
-The Kotlin/Spring Boot development baseline, production-like Docker runtime image, unified quality gate, GitHub Actions CI, first Client domain model, and ArchUnit architecture testing are implemented. Database, persistence, and integration-testing technologies remain planned for later iterations:
+The Kotlin/Spring Boot development baseline, production-like Docker runtime image, unified quality gate, GitHub Actions CI, first Client domain model, Client persistence baseline, and ArchUnit architecture testing are implemented:
 
 - Kotlin targeting Java 21;
 - Spring Boot;
@@ -30,12 +30,14 @@ The Kotlin/Spring Boot development baseline, production-like Docker runtime imag
 - Spotless with ktlint for Kotlin formatting;
 - detekt for Kotlin static analysis;
 - GitHub Actions for continuous integration;
-- Docker and Docker Compose for the production-like local runtime image;
+- Docker and Docker Compose for development services and the production-like local runtime image;
 - PostgreSQL with Flyway migrations;
 - JPA/Hibernate for writes;
-- Spring `JdbcClient` for reads;
-- JUnit 6 for application-context and domain unit tests, with Testcontainers planned for later integration tests;
+- JUnit 6 for domain unit and integration tests;
+- Testcontainers with PostgreSQL for integration tests;
 - ArchUnit for automated architecture checks.
+
+Spring `JdbcClient` read models remain planned and will be introduced only with a concrete query use case.
 
 Technology choices will be added only when they support a concrete business or engineering need.
 
@@ -59,11 +61,11 @@ Later iterations are intended to introduce passwordless sign-in using one-time p
 
 ## Project status
 
-**Status: Client domain model complete**
+**Status: Client persistence baseline complete**
 
-The repository contains a minimal Kotlin/Spring Boot application, Gradle Wrapper build, application-context and domain unit tests, Kotlin formatting with Spotless and ktlint, detekt static analysis, ArchUnit architecture testing, GitHub Actions CI, an Actuator readiness endpoint, a production-like local runtime image, and the pure-Kotlin `Client` domain model. There are currently no business endpoints, database integration, event flows, or business infrastructure.
+The repository contains a minimal Kotlin/Spring Boot application, Gradle Wrapper build, domain and integration tests, Kotlin formatting with Spotless and ktlint, detekt static analysis, ArchUnit architecture testing, GitHub Actions CI, explicit datasource-backed readiness, a production-like local runtime image, the pure-Kotlin `Client` domain model, and its PostgreSQL write persistence. There are currently no business endpoints, Application use cases, read models, or event flows.
 
-The documentation foundation, Spring Boot development baseline, production-like runtime image baseline, unified quality gate with CI, and Client domain model are complete. The next iteration will introduce Client persistence.
+The documentation foundation, Spring Boot development baseline, production-like runtime image baseline, unified quality gate with CI, Client domain model, and Client persistence baseline are complete. The next iteration will introduce the Create Client Application use case.
 
 ## Quality checks
 
@@ -76,6 +78,8 @@ make qa
 
 `make qa` delegates directly to the Gradle Wrapper task.
 
+Integration tests start their own PostgreSQL through Testcontainers and connect directly to the host Docker daemon. They do not use the development Compose service.
+
 ## Local development port
 
 The application listens on port `8081` by default. Override it for a single run through the environment when that port is already in use:
@@ -84,18 +88,27 @@ The application listens on port `8081` by default. Override it for a single run 
 SERVER_PORT=9090 make dev
 ```
 
+`make dev` delegates to `bootRun`. Spring Boot's development-only Docker Compose support discovers root `compose.yaml`, starts PostgreSQL on an available loopback port, provides its connection details to the application, and stops the service when the application exits. Set `POSTGRES_PORT` only when a fixed host port is useful; Spring Boot uses the actual mapped port automatically.
+
+Flyway applies the Client-owned migrations during application startup. Hibernate validates the resulting schema and does not create it. Readiness includes the datasource because this demo cannot serve its write model without PostgreSQL; liveness deliberately remains independent of external database availability. The mapping, migration, and health decisions are recorded in [ADR 0002](docs/adr/0002-map-client-with-an-infrastructure-jpa-entity.md).
+
 ## Runtime image
 
-Build the application JAR on the host and package it into the local runtime image, then start and verify that image:
+Build the application JAR on the host and package it into the local runtime image, then provide the production-like Compose workflow with its PostgreSQL credentials and start it:
 
 ```text
 make image
+export DATABASE_NAME=pragmatic_jvm_demo
+export DATABASE_USERNAME=pragmatic_jvm_demo
+export DATABASE_PASSWORD=choose-a-local-runtime-password
 make up
 make smoke
 make down
 ```
 
-`make up` starts the existing image without rebuilding it. The application always listens on port `8081` inside the runtime container. `APP_PORT` controls only the port published on the host; it does not change the container's `SERVER_PORT`. Set the same `APP_PORT` value for `make up` and `make smoke` to use another host port.
+`make up` starts the existing image and its PostgreSQL service without rebuilding the image. The required database settings are supplied through environment variables and have no runtime defaults. The application always listens on port `8081` inside the runtime container. `APP_PORT` controls only the port published on the host; it does not change the container's `SERVER_PORT`. Set the same `APP_PORT` value for `make up` and `make smoke` to use another host port.
+
+When running the packaged application outside this Compose workflow, configure the standard `SPRING_DATASOURCE_URL`, `SPRING_DATASOURCE_USERNAME`, and `SPRING_DATASOURCE_PASSWORD` environment variables.
 
 The image uses an exec-form entrypoint. Supply JVM options through Java's standard `JAVA_TOOL_OPTIONS` environment variable when starting the container; no universal heap limit is built into the image.
 
