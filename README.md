@@ -22,7 +22,7 @@ The planned work will demonstrate:
 
 ## Technology stack
 
-The Kotlin/Spring Boot development baseline and production-like Docker runtime image are implemented. The unified quality gate and GitHub Actions workflow are implemented locally and await their first CI run. Database, persistence, integration-testing, and architecture-testing technologies remain planned for later iterations:
+The Kotlin/Spring Boot development baseline, production-like Docker runtime image, unified quality gate, and GitHub Actions CI are implemented. Database, persistence, integration-testing, and architecture-testing technologies remain planned for later iterations:
 
 - Kotlin targeting Java 21;
 - Spring Boot;
@@ -59,11 +59,11 @@ Later iterations are intended to introduce passwordless sign-in using one-time p
 
 ## Project status
 
-**Status: Unified quality gate and continuous integration awaiting CI verification**
+**Status: Unified quality gate and continuous integration complete**
 
 The repository contains a minimal Kotlin/Spring Boot application, Gradle Wrapper build, application-context test, Kotlin formatting with Spotless and ktlint, detekt static analysis, GitHub Actions CI, an Actuator readiness endpoint, and a production-like local runtime image. There are currently no business endpoints, domain aggregates, database integration, event flows, or business infrastructure.
 
-The documentation foundation, Spring Boot development baseline, and production-like runtime image baseline are complete. The unified quality gate and CI workflow await their first green GitHub Actions run before iteration 3 can be marked complete. The `Client` domain model remains the next iteration after that verification.
+The documentation foundation, Spring Boot development baseline, production-like runtime image baseline, and unified quality gate with CI are complete. The next iteration will introduce the `Client` domain model.
 
 ## Quality checks
 

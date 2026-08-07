@@ -21,7 +21,7 @@ Items are ordered by dependency. Implementation items remain `TODO` until their 
 | 0 | Repository documentation foundation | `DONE` |
 | 1 | Spring Boot development baseline | `DONE` |
 | 2 | Production-like runtime image baseline | `DONE` |
-| 3 | Unified quality gate and continuous integration | `TODO` |
+| 3 | Unified quality gate and continuous integration | `DONE` |
 | 4 | Client domain model | `TODO` |
 | 5 | Client persistence baseline | `TODO` |
 | 6 | Create Client application use case | `TODO` |
@@ -232,9 +232,7 @@ make down
 
 ## 3. Unified quality gate and continuous integration
 
-**Status:** `TODO`
-
-**Verification state:** Local acceptance commands pass; the first GitHub Actions run is pending.
+**Status:** `DONE`
 
 **Goal**
 
